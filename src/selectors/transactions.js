@@ -1,5 +1,6 @@
 const getVisibleTransactions = (transactions, { text, sortBy, startDate, endDate }) => {
   return transactions.filter((transaction) => {
+    console.log(transaction)
     const startDateMatch = typeof startDate !== 'number' || transaction.createdAt >= startDate
     const endDateMatch = typeof endDate !== 'number' || transaction.createdAt <= startDate
     const textMatch = transaction.description.toLowerCase().includes(text.toLowerCase())

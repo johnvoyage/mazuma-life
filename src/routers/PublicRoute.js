@@ -13,7 +13,6 @@ const PublicRoute = ({
       <Redirect to="/transactions" />
     ) : (
       <div>
-        <Header />
         <Component {...props}/>
       </div>
     )

@@ -3,7 +3,8 @@ import database from '../firebase/firebase'
 
 
 export const startAddTransaction = (transactionData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
     const {
       description = '',
       note = '',
@@ -12,7 +13,7 @@ export const startAddTransaction = (transactionData = {}) => {
     } = transactionData
     const transaction = { description, note, amount, createdAt }
 
-    return database.ref('transactions').push(transaction).then((ref) => {
+    return database.ref(`users/${uid}/transactions`).push(transaction).then((ref) => {
       dispatch(addTransaction({
         id: ref.key,
         ...transaction,
@@ -27,8 +28,9 @@ export const addTransaction = (transaction) => ({
 })
 
 export const startRemoveTransaction = ({ id } = {}) => {
-  return (dispatch) => {
-    return database.ref(`transactions/${id}`).remove().then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return database.ref(`users/${uid}/transactions/${id}`).remove().then(() => {
       console.log(id)
       dispatch(removeTransaction({ id }))
     })
@@ -47,16 +49,18 @@ export const editTransaction = (id, updates) => ({
 }) 
 
 export const startEditTransaction = (id, updates) => {
-  return (dispatch) => {
-    return database.ref(`transactions/${id}`).update(updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return database.ref(`users/${uid}/transactions/${id}`).update(updates).then(() => {
       dispatch(editTransaction(id, updates))
     })
   }
 }
 
 export const startSetTransactions = () => {
-  return (dispatch) => {
-    return database.ref('transactions').once('value').then((snapshot) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return database.ref(`users/${uid}/transactions`).once('value').then((snapshot) => {
       const transactions = []
 
       snapshot.forEach((childSnapshot) => {

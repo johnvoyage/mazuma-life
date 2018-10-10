@@ -1,27 +1,31 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory'
 
 import TransactionDashboardPage from '../components/transactions/DashboardPage'
 import AddTransactionPage from '../components/transactions/AddTransactionPage'
 import EditTransactionPage from '../components/transactions/EditTransactionPage'
 import HelpPage from '../components/misc/HelpPage'
 import NotFoundPage from '../components/misc/NotFoundPage'
-import Header from '../components/nav/Header'
+import LoginPage from '../components/auth/LoginPage'
+import PrivateRoute from './PrivateRoute'
 
+
+export const history = createHistory()
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
-      <Header />
       <Switch>
-        <Route path='/' component={TransactionDashboardPage} exact={true} />
-        <Route path='/create' component={AddTransactionPage} />
-        <Route path='/edit/:id' component={EditTransactionPage} />
+        <Route path='/' component={LoginPage} exact={true} />
+        <PrivateRoute path='/transactions' component={TransactionDashboardPage} />
+        <PrivateRoute path='/create' component={AddTransactionPage} />
+        <PrivateRoute path='/edit/:id' component={EditTransactionPage} />
         <Route path='/help' component={HelpPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 )
 
 export default AppRouter

@@ -46,6 +46,14 @@ export const editTransaction = (id, updates) => ({
   updates,
 }) 
 
+export const startEditTransaction = (id, updates) => {
+  return (dispatch) => {
+    return database.ref(`transactions/${id}`).update(updates).then(() => {
+      dispatch(editTransaction(id, updates))
+    })
+  }
+}
+
 export const startSetTransactions = () => {
   return (dispatch) => {
     return database.ref('transactions').once('value').then((snapshot) => {

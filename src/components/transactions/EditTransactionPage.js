@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import TransactionForm from './TransactionForm'
-import { editTransaction, startRemoveTransaction } from '../../actions/transactions';
+import { startEditTransaction, startRemoveTransaction } from '../../actions/transactions';
 
 class EditTransactionPage extends React.Component {
   onSubmit = (transaction) => {
-    this.props.editTransaction(this.props.transaction.id, transaction)
+    this.props.startEditTransaction(this.props.transaction.id, transaction)
     this.props.history.push('/')
   }
   onRemove = () => {
@@ -31,7 +31,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-  editTransaction: (id, transaction) => dispatch(editTransaction(id, transaction)),
+  startEditTransaction: (id, transaction) => dispatch(startEditTransaction(id, transaction)),
   startRemoveTransaction: (data) => dispatch(startRemoveTransaction(data))
 })
 

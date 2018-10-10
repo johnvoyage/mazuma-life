@@ -4,12 +4,10 @@ import { Provider } from 'react-redux'
 
 import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
-import { addTransaction } from './actions/transactions'
+import { startSetTransactions } from './actions/transactions'
 
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
-
-import './firebase/firebase'
 
 const store = configureStore()
 
@@ -19,4 +17,8 @@ const jsx = (
   </Provider>
 )
 
-ReactDOM.render(jsx, document.getElementById('app'))
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
+
+store.dispatch(startSetTransactions()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'))
+})

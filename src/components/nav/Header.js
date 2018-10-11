@@ -9,7 +9,7 @@ const Header = ({ startLogout }) => (
   <header className='header'>
     <div className='content-container'> 
       <div className='header__content'>
-        <Link className='header__title' to='/transactions'>
+        <Link className='header__title' to='/profile'>
           <h1>Mazuma</h1>
         </Link>
         <button className='button button--link' onClick={startLogout}>Logout</button>

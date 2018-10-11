@@ -16,11 +16,18 @@ class EditTransactionPage extends React.Component {
   render() {
     return (
       <div>
-        <TransactionForm 
-          transaction={this.props.transaction}
-          onSubmit={this.onSubmit}
-        />
-        <button onClick={this.onRemove}>Remove</button>
+        <div className='page-header'>
+          <div className='content-container'>
+            <h1 className='page-header__title'>Edit Transaction</h1>
+          </div>
+        </div>
+        <div className='content-container'>
+          <TransactionForm 
+            transaction={this.props.transaction}
+            onSubmit={this.onSubmit}
+          />
+          <button className='button button--secondary' onClick={this.onRemove}>Remove</button>
+        </div>
       </div>
     )
   } 

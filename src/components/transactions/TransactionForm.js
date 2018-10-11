@@ -47,32 +47,33 @@ class TransactionForm extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.onSubmit}>
-          <input 
-            type='text'
-            placeholder='description'
-            autoFocus
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
-          />
-          <input 
-            type='text'
-            value={this.state.amount}
-            placeholder='amount'
-            onChange={this.onAmountChange}
-          />
-          <textarea 
-            placeholder='Add a note for your transaction'
-            value={this.state.note}
-            onChange={this.onNoteChange}
-          />
-          <button>
-            Add Transaction
-          </button>
-        </form>
-      </div>
+      <form className='form' onSubmit={this.onSubmit}>
+        {this.state.error && <p className='form__error'>{this.state.error}</p>}
+        <input 
+          className='text-input'
+          type='text'
+          placeholder='description'
+          autoFocus
+          value={this.state.description}
+          onChange={this.onDescriptionChange}
+        />
+        <input 
+          className='text-input'
+          type='text'
+          value={this.state.amount}
+          placeholder='amount'
+          onChange={this.onAmountChange}
+        />
+        <textarea 
+          className='textarea'
+          placeholder='Add a note for your transaction'
+          value={this.state.note}
+          onChange={this.onNoteChange}
+        />
+        <div>
+          <button className='button'>Save Transaction</button>
+        </div>
+      </form>
     )
   }
 }

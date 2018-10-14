@@ -10,7 +10,7 @@ const PublicRoute = ({
 }) => (
   <Route {...rest} component={(props) => (
     isAuthenticated ? (
-      <Redirect to="/transactions" />
+      <Redirect to="/profile" />
     ) : (
       <div>
         <Component {...props}/>

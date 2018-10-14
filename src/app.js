@@ -19,6 +19,7 @@ const jsx = (
     <AppRouter />
   </Provider>
 )
+console.log(history.location.pathname)
 
 let hasRendered = false 
 const renderApp = () => {
@@ -30,18 +31,25 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'))
 
-// firebase.auth().onAuthStateChanged((user) => {
-//   if (user) {
-//     store.dispatch(login(user.uid))
-//     store.dispatch(startSetTransactions()).then(() => {
-//       renderApp()
-//       if (history.location.pathname === '/') {
-//         history.push('/profile')
-//       }
-//     })
-//   } else {
-//     store.dispatch(logout())
-//     renderApp()
-//     history.push('/')
-//   }
-// })
+firebase.auth().onAuthStateChanged((user) => {
+  console.log(history.location.pathname)
+
+  if (user) {
+    console.log(history.location.pathname)
+
+    store.dispatch(login(user.uid))
+    console.log(history.location.pathname)
+
+    store.dispatch(startSetTransactions()).then(() => {
+      renderApp()
+      console.log(history.location.pathname)
+      if (history.location.pathname === '/') {
+        history.push('/profile')
+      }
+    })
+  } else {
+    store.dispatch(logout())
+    renderApp()
+    history.push('/')
+  }
+})

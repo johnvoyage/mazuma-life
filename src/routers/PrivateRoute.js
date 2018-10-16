@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
 import Header from '../components/nav/Header'
+import TopNav from '../components/nav/TopNav'
+
 
 
 const PrivateRoute = ({ 
@@ -14,6 +16,7 @@ const PrivateRoute = ({
     isAuthenticated ? (
       <div>
         <Header />
+        <TopNav />
         <Component {...props}/>
       </div>
     ) : (

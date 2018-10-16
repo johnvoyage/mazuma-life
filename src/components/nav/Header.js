@@ -12,6 +12,9 @@ const Header = ({ startLogout }) => (
         <Link className='header__title' to='/profile'>
           <h1>Mazuma</h1>
         </Link>
+        <Link className='header__title' to='/profile'>
+          <h1>Quick Entry</h1>
+        </Link>
         <button className='button button--link' onClick={startLogout}>Logout</button>
       </div>
     </div>

@@ -10,6 +10,7 @@ const TopNav = () => (
     <Link to='/entries'>Entries</Link>
     <Link to='/goals'>Goals</Link>
     <Link to='/charts'>Charts</Link>
+    <Link to='/table/amortization'>Amortization Table</Link>
   </div>
 )
 

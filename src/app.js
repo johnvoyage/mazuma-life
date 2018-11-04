@@ -11,6 +11,7 @@ import LoadingPage from './components/async/LoadingPage'
 
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
+import "react-table/react-table.css"
 
 const store = configureStore()
 

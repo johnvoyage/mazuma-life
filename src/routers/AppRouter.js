@@ -5,6 +5,9 @@ import createHistory from 'history/createBrowserHistory'
 import TransactionDashboardPage from '../components/transactions/DashboardPage'
 import AddTransactionPage from '../components/transactions/AddTransactionPage'
 import EditTransactionPage from '../components/transactions/EditTransactionPage'
+
+import AmortizationTableContainer from '../components/amortization/AmortizationTableContainer'
+
 import NotFoundPage from '../components/misc/NotFoundPage'
 import LoginPage from '../components/auth/LoginPage'
 import PrivateRoute from './PrivateRoute'
@@ -28,6 +31,7 @@ const AppRouter = () => (
         <PrivateRoute path='/entries' component={EntriesDashboardPage} />
         <PrivateRoute path='/profile' component={UserPage} />
         <PrivateRoute path='/chart' component={NotFoundPage} />
+        <PrivateRoute path='/table/amortization' component={AmortizationTableContainer} />
         <PrivateRoute path='/goals' component={NotFoundPage} />
 
         <Route component={NotFoundPage} />

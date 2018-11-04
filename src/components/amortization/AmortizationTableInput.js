@@ -39,6 +39,13 @@ const AmortizationTableInput = (props) => {
         placeholder='date of first pmt'
         value={fieldInputs.firstPaymentDate}
       />
+      <br />
+      <input 
+        name='payment'
+        onChange={props.onInputChange} type='text' 
+        placeholder='payment (OPTIONAL)'
+        value={fieldInputs.payment}
+      />
     </div>
   )
 }

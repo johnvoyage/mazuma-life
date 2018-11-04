@@ -1,5 +1,4 @@
 import React from 'react'
-import numeral from 'numeral'
 
 import AmortizationTable from './AmortizationTable';
 import AmortizationTableInput from './AmortizationTableInput'
@@ -11,11 +10,12 @@ class AmortizationTableContainer extends React.Component {
     this.onInputChange = this.onInputChange.bind(this)
 
     this.state = {
-      principal: '',
+      principal: 5555,
       term: 2,
-      interestRate: '',
+      interestRate: 0.05,
       paymentsPerYear: 3,
-      firstPaymentDate: '',
+      firstPaymentDate: new Date(),
+      payment: 1000,
     }
   }
 

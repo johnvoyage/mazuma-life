@@ -30,22 +30,18 @@ class AmortizationTable extends React.Component {
 
     const middleRowData = (priorRowData, period) => {
       const { balance: priorBalance } = priorRowData
-      // const date = moment(priorDate).add(1, 'M')
-      // console.log(priorDate)
-      // console.log(moment(firstPaymentDate).add(period, 'M').format('MMM Do, YYYY'))
-      // console.log(typeof moment(priorDate))
       const date = moment(firstPaymentDate).add(period, 'M').format('MMM Do, YYYY')
       const interest = (numeral(interestRate)._value * numeral(priorBalance)._value)
       const principal = payment - interest
       const balance = numeral(priorBalance)._value - principal
 
       return {
-        period,
+        balance: numeral(balance).format('$ 0,0.00'),
         date,
         interest: numeral(interest).format('$ 0,0.00'),
         payment: numeral(payment).format('$ 0,0.00'),
+        period,
         principal: numeral(principal).format('$ 0,0.00'), 
-        balance: numeral(balance).format('$ 0,0.00'),
       }
     }
 

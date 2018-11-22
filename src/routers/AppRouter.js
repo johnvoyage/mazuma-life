@@ -7,7 +7,7 @@ import AddTransactionPage from '../components/transactions/AddTransactionPage'
 import EditTransactionPage from '../components/transactions/EditTransactionPage'
 
 import AmortizationTableContainer from '../components/amortization/AmortizationTableContainer'
-
+import AccountsContainer from '../components/accounts/AccountsContainer'
 import NotFoundPage from '../components/misc/NotFoundPage'
 import LoginPage from '../components/auth/LoginPage'
 import PrivateRoute from './PrivateRoute'
@@ -23,11 +23,12 @@ const AppRouter = () => (
     <div>
       <Switch>
         <PublicRoute path='/' component={LoginPage} exact={true} />
+
         <PrivateRoute path='/transactions' component={TransactionDashboardPage} />
         <PrivateRoute path='/create' component={AddTransactionPage} />
         <PrivateRoute path='/edit/:id' component={EditTransactionPage} />
 
-        <PrivateRoute path='/accounts' component={NotFoundPage} />
+        <PrivateRoute path='/accounts' component={AccountsContainer} />
         <PrivateRoute path='/entries' component={EntriesDashboardPage} />
         <PrivateRoute path='/profile' component={UserPage} />
         <PrivateRoute path='/chart' component={NotFoundPage} />

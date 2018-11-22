@@ -1,54 +1,42 @@
 import React from 'react'
 
+
 const AccountsForm = (props) => {
-  const { fieldInputs } = props
+  const { fieldInputs, onInputChange, handleNewAccount } = props
 
   return (
     <div>
+      <label>Name</label>
       <input
-        name='principal'
-        onChange={props.onInputChange}
-        placeholder='original principal'
-        value={fieldInputs.principal}
+        name='name'
+        onChange={onInputChange}
+        placeholder='name'
+        value={fieldInputs.name}
       />
       <br />
-      <input
-        name='term'
-        onChange={props.onInputChange} type='text'
-        placeholder='loan term'
+      <label>Description</label>
+      <textarea
+        name='description'
+        onChange={onInputChange} type='text'
+        placeholder='description'
         value={fieldInputs.term}
       />
       <br />
+      <label>Category</label>
       <input
-        name='interestRate'
-        onChange={props.onInputChange} type='text'
-        placeholder='interest rate'
-        value={fieldInputs.interestRate}
+        name='category'
+        onChange={onInputChange} type='text'
+        placeholder='category'
+        value={fieldInputs.category}
       />
       <br />
-      <input
-        name='paymentsPerYear'
-        onChange={props.onInputChange} type='text'
-        placeholder='payments per year'
-        value={fieldInputs.paymentsPerYear}
-      />
-      <br />
-      <input
-        name='firstPaymentDate'
-        onChange={props.onInputChange} type='text'
-        placeholder='date of first pmt'
-        value={fieldInputs.firstPaymentDate}
-      />
-      <br />
-      <input
-        name='payment'
-        onChange={props.onInputChange} type='text'
-        placeholder='payment (OPTIONAL)'
-        value={fieldInputs.payment}
-      />
+      <button
+        onClick={handleNewAccount}
+      >
+        Add
+      </button>
     </div>
   )
 }
-
 
 export default AccountsForm

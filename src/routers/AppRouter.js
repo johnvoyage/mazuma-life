@@ -13,7 +13,7 @@ import LoginPage from '../components/auth/LoginPage'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import UserPage from '../components/users/UserPage'
-import EntriesDashboardPage from '../components/entries/EntriesDashboardPage'
+import EntriesContainer from '../components/entries/EntriesContainer'
 
 
 export const history = createHistory()
@@ -29,7 +29,7 @@ const AppRouter = () => (
         <PrivateRoute path='/edit/:id' component={EditTransactionPage} />
 
         <PrivateRoute path='/accounts' component={AccountsContainer} />
-        <PrivateRoute path='/entries' component={EntriesDashboardPage} />
+        <PrivateRoute path='/entries' component={EntriesContainer} />
         <PrivateRoute path='/profile' component={UserPage} />
         <PrivateRoute path='/chart' component={NotFoundPage} />
         <PrivateRoute path='/table/amortization' component={AmortizationTableContainer} />

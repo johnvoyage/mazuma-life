@@ -5,13 +5,14 @@ import { Provider } from 'react-redux'
 import AppRouter, { history } from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import { startSetTransactions } from './actions/transactions'
+import { startSetAccounts } from './actions/accounts'
 import { login, logout } from './actions/auth'
 import { firebase } from './firebase/firebase'
 import LoadingPage from './components/async/LoadingPage'
 
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
-import "react-table/react-table.css"
+import 'react-table/react-table.css'
 
 const store = configureStore()
 
@@ -21,7 +22,7 @@ const jsx = (
   </Provider>
 )
 
-let hasRendered = false 
+let hasRendered = false
 const renderApp = () => {
   if (!hasRendered) {
     ReactDOM.render(jsx, document.getElementById('app'))
@@ -35,11 +36,12 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch(login(user.uid))
     store.dispatch(startSetTransactions()).then(() => {
+    store.dispatch(startSetAccounts()).then(() => {
       renderApp()
       if (history.location.pathname === '/') {
         history.push('/profile')
       }
-    })
+    })})
   } else {
     store.dispatch(logout())
     renderApp()

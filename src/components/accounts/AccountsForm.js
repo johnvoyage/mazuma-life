@@ -32,7 +32,7 @@ const AccountsForm = (props) => {
       <br />
       <button
         onClick={handleNewAccount}
-        disabled={true}
+        // disabled={true}
       >
         Add
       </button>

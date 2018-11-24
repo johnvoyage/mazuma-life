@@ -22,12 +22,28 @@ const AccountsForm = (props) => {
         value={fieldInputs.term}
       />
       <br />
-      <label>Category</label>
+      <label>Accounts</label>
       <input
-        name='category'
+        name='accounts'
         onChange={onInputChange} type='text'
-        placeholder='category'
-        value={fieldInputs.category}
+        placeholder='accounts'
+        value={fieldInputs.accounts}
+      />
+      <br />
+      <label>Debit(s)</label>
+      <input
+        name='debits'
+        onChange={onInputChange} type='text'
+        placeholder='debits'
+        value={fieldInputs.debits}
+      />
+      <br />
+      <label>Credit(s)</label>
+      <input
+        name='credits'
+        onChange={onInputChange} type='text'
+        placeholder='credits'
+        value={fieldInputs.credits}
       />
       <br />
       <button

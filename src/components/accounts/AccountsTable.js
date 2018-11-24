@@ -5,18 +5,16 @@ import { connect } from 'react-redux'
 const AccountsTable = (props) => {
   const { accounts } = props
 
-  const data = () => {
-    return accounts.map(account => ({
+  const data = accounts.map(account => ({
       category: account.category,
       description: account.description,
       name: account.name,
     }))
-  }
 
   return (
     <div>
       <ReactTable
-      data={data()}
+      data={data}
       columns={[
 
         {

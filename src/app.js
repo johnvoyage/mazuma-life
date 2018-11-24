@@ -6,6 +6,8 @@ import AppRouter, { history } from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import { startSetTransactions } from './actions/transactions'
 import { startSetAccounts } from './actions/accounts'
+import { startSetEntries } from './actions/entries'
+
 import { login, logout } from './actions/auth'
 import { firebase } from './firebase/firebase'
 import LoadingPage from './components/async/LoadingPage'
@@ -37,11 +39,12 @@ firebase.auth().onAuthStateChanged((user) => {
     store.dispatch(login(user.uid))
     store.dispatch(startSetTransactions()).then(() => {
     store.dispatch(startSetAccounts()).then(() => {
+    store.dispatch(startSetEntries()).then(() => {
       renderApp()
       if (history.location.pathname === '/') {
         history.push('/profile')
       }
-    })})
+    })})})
   } else {
     store.dispatch(logout())
     renderApp()

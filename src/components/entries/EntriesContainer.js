@@ -1,17 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import AccountsTable from './AccountsTable';
-import AccountsForm from './AccountsForm'
-import { startAddAccount } from '../../actions/accounts'
+import EntriesTable from './EntriesTable';
+import EntriesForm from './EntriesForm'
+import { startAddEntry } from '../../actions/accounts'
 
 
-class AccountsContainer extends React.Component {
+class EntriesContainer extends React.Component {
   constructor(props) {
     super(props)
 
     this.onInputChange = this.onInputChange.bind(this)
-    this.handleNewAccount = this.handleNewAccount.bind(this)
+    this.handleNewEntry = this.handleNewEntry.bind(this)
 
     this.state = {
       category: '',
@@ -29,25 +29,25 @@ class AccountsContainer extends React.Component {
     }))
   }
 
-  handleNewAccount(event) {
+  handleNewEntry(event) {
     const fieldInputs = { ...this.state }
-    this.props.startAddAccount(fieldInputs)
+    this.props.startAddEntry(fieldInputs)
     this.setState(() => ({
       category: '',
       description: '',
-      name: '',      
+      name: '',
     }))
   }
 
   render() {
     return (
       <div>
-        <AccountsForm
+        <EntriesForm
           fieldInputs={this.state}
           onInputChange={this.onInputChange}
-          handleNewAccount={this.handleNewAccount}
+          handleNewEntry={this.handleNewEntry}
         />
-        <AccountsTable
+        <EntriesTable
           // fieldInputs={this.state}
         />
       </div>
@@ -56,7 +56,7 @@ class AccountsContainer extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddAccount: (account) => dispatch(startAddAccount(account))
+  startAddEntry: (account) => dispatch(startAddEntry(account))
 })
 
-export default connect(undefined, mapDispatchToProps)(AccountsContainer)
+export default connect(undefined, mapDispatchToProps)(EntriesContainer)

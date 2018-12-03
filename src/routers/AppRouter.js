@@ -14,6 +14,8 @@ import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import UserPage from '../components/users/UserPage'
 import EntriesContainer from '../components/entries/EntriesContainer'
+import EntriesForm from '../components/entries/EntriesForm'
+
 
 
 export const history = createHistory()
@@ -29,7 +31,10 @@ const AppRouter = () => (
         <PrivateRoute path='/edit/:id' component={EditTransactionPage} />
 
         <PrivateRoute path='/accounts' component={AccountsContainer} />
-        <PrivateRoute path='/entries' component={EntriesContainer} />
+        <PrivateRoute path='/entries' component={EntriesContainer} exact/>
+        <PrivateRoute path='/entries/new' component={EntriesForm} />
+        <PrivateRoute path='/entries/edit/:id' component={EntriesForm} />
+
         <PrivateRoute path='/profile' component={UserPage} />
         <PrivateRoute path='/chart' component={NotFoundPage} />
         <PrivateRoute path='/table/amortization' component={AmortizationTableContainer} />

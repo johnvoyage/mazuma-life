@@ -1,11 +1,11 @@
 import React from 'react'
-import ReactTable from "react-table"
+import ReactTable from 'react-table'
 import { connect } from 'react-redux'
 
-const AccountsTable = (props) => {
-  const { accounts } = props
+const EntriesTable = (props) => {
+  const { entries } = props
 
-  const data = accounts.map(account => ({
+  const data = entries.map(account => ({
     // category: account.category,
     // description: account.description,
     // name: account.name,
@@ -17,33 +17,29 @@ const AccountsTable = (props) => {
         data={data}
         columns={[
           {
-            Header: "Entries",
-            columns: [
-              {
-                Header: "Name",
-                accessor: "name"
-              }, {
-                Header: "Description",
-                accessor: "description",
-                // accessor: d => d.lastName
-              }, {
-                Header: 'Accounts',
-                accessor: 'accounts',
-              }, {
-                Header: 'Debits',
-                accessor: 'debits',
-              }, {
-                Header: 'Credits',
-                accessor: 'credits',
-              }
-            ]
-          },
+            Header: 'Name',
+            accessor: 'name'
+          }, {
+            Header: 'Description',
+            accessor: 'description',
+            // accessor: d => d.lastName
+          }, {
+            Header: 'Accounts',
+            accessor: 'accounts',
+          }, {
+            Header: 'Debits',
+            accessor: 'debits',
+          }, {
+            Header: 'Credits',
+            accessor: 'credits',
+          }
+        ]}
           // {
-          //   Header: "Info",
+          //   Header: 'Info',
           //   columns: [
           //     {
-          //       Header: "Age",
-          //       accessor: "age",
+          //       Header: 'Age',
+          //       accessor: 'age',
           //       aggregate: vals => _.round(_.mean(vals)),
           //       Aggregated: row => {
           //         return (
@@ -54,24 +50,23 @@ const AccountsTable = (props) => {
           //       }
           //     },
           //     {
-          //       Header: "Visits",
-          //       accessor: "visits",
+          //       Header: 'Visits',
+          //       accessor: 'visits',
           //       aggregate: vals => _.sum(vals)
           //     }
           //   ]
           // }
-        ]}
-        pivotBy={["name"]}
+        pivotBy={['name']}
         defaultPageSize={10}
-        className="-striped -highlight"
+        className='-striped -highlight'
       />
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
-  accounts: state.entries
+  entries: state.entries
   // startAddAccount: (account) => dispatch(startAddAccount(account))
 })
 
-export default connect(mapStateToProps, undefined)(AccountsTable)
+export default connect(mapStateToProps, undefined)(EntriesTable)

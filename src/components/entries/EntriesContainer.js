@@ -7,46 +7,46 @@ import { startAddEntry } from '../../actions/accounts'
 
 
 class EntriesContainer extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.onInputChange = this.onInputChange.bind(this)
-    this.handleNewEntry = this.handleNewEntry.bind(this)
-
-    this.state = {
-      category: '',
-      description: '',
-      name: '',
-    }
-  }
-
-  onInputChange(event) {
-    // console.log(event.target.name)
-    const inputField = event.target.name
-    const inputValue = event.target.value
-    this.setState(() => ({
-      [inputField]: inputValue
-    }))
-  }
-
-  handleNewEntry(event) {
-    const fieldInputs = { ...this.state }
-    this.props.startAddEntry(fieldInputs)
-    this.setState(() => ({
-      category: '',
-      description: '',
-      name: '',
-    }))
-  }
+  // constructor(props) {
+  //   super(props)
+  //
+  //   this.onInputChange = this.onInputChange.bind(this)
+  //   this.handleNewEntry = this.handleNewEntry.bind(this)
+  //
+  //   this.state = {
+  //     category: '',
+  //     description: '',
+  //     name: '',
+  //   }
+  // }
+  //
+  // onInputChange(event) {
+  //   // console.log(event.target.name)
+  //   const inputField = event.target.name
+  //   const inputValue = event.target.value
+  //   this.setState(() => ({
+  //     [inputField]: inputValue
+  //   }))
+  // }
+  //
+  // handleNewEntry(event) {
+  //   const fieldInputs = { ...this.state }
+  //   this.props.startAddEntry(fieldInputs)
+  //   this.setState(() => ({
+  //     category: '',
+  //     description: '',
+  //     name: '',
+  //   }))
+  // }
 
   render() {
+    //   <EntriesForm
+    //     fieldInputs={this.state}
+    //     onInputChange={this.onInputChange}
+    //     handleNewEntry={this.handleNewEntry}
+    //   />
     return (
       <div>
-        <EntriesForm
-          fieldInputs={this.state}
-          onInputChange={this.onInputChange}
-          handleNewEntry={this.handleNewEntry}
-        />
         <EntriesTable
           // fieldInputs={this.state}
         />

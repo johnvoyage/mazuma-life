@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { connect } from 'react-redux'
 
 class EntriesForm extends React.Component {
   constructor(props) {
@@ -12,31 +12,49 @@ class EntriesForm extends React.Component {
     this.renderFields = this.renderFields.bind(this)
 
     this.state = {
-      debitFields: [{ account: 'Account', amount: 0 }],
-      creditFields: [{ account: 'Account', amount: 0 }],
+      debitFields: [{  }],
+      creditFields: [{  }],
       description: '',
       name: '',
     }
   }
 
-  renderFields(debitOrCredit) {
-    const fieldInputs = { ...this.state }
-    const fields = fieldInputs[debitOrCredit]
+  renderFields(debitOrCreditFields) {
+    const { accounts } = this.props
+    const fields = this.state[debitOrCreditFields]
+    const isDebit = debitOrCreditFields === 'debitFields'
+
+    const selectedAccounts = [
+      ...this.state.debitFields.map(f => f.account),
+      ...this.state.creditFields.map(f => f.account),
+    ]
 
     return fields.map((field, idx) => {
       return (
         <div
           key={idx}
-          style={{background: 'grey', padding: '2%', display: 'inline-block'}}
+          style={{
+            background: isDebit ? 'white' : 'grey',
+            float: isDebit ? 'left' : 'right',
+            display: 'inline-block',
+            padding: '2%',
+          }}
         >
           <label>Accounts</label>
-          <input
+          <select
             name='account'
-            onChange={this.onEntryInputChange}
-            type='selection'
-            placeholder='account'
-            value={field.account}
-          />
+            onChange={(event) => this.onEntryInputChange(event, debitOrCreditFields, idx)}
+            value={field.account || 'Select an Account'}
+          >
+            <option key='n/a' value=''>Select One</option>
+            {accounts.map(a => (
+              <option
+                key={a.id}
+                value={a.name}
+                disabled={selectedAccounts.includes(a.name)}
+              >{a.name}</option>
+            ))}
+          </select>
           <label>Debit(s)</label>
           <input
             name='amount'
@@ -45,39 +63,46 @@ class EntriesForm extends React.Component {
             placeholder='amount'
             value={field.amount}
           />
-          <button
-            onClick={(event) => this.handleNewAccount(debitOrCredit)}
-          >
-            +
-          </button>
-          { fields.length > 1 && (
+          { idx === fields.length - 1 &&
             <button
-            onClick={(event) => this.handleRemoveAccount(debitOrCredit, field.account)}
+              onClick={(event) => this.handleNewAccount(debitOrCreditFields)}
             >
-            -
+              +
             </button>
-          )}
+          }
+          { fields.length > 1 && 
+            <button
+            onClick={(event) => this.handleRemoveAccount(debitOrCreditFields, field.account)}
+            >
+              -
+            </button>
+          }
         </div>
       )
     })
   }
 
-  onEntryInputChange(event) {
-    console.log('Here`')
+  onEntryInputChange(event, debitOrCreditFields, idx) {
+    const selectedAccount = event.target.value
+    const updatedFields = [ ...this.state[debitOrCreditFields] ]
+    updatedFields[idx].account = selectedAccount
+    this.setState({
+      [debitOrCreditFields]: updatedFields
+    })
   }
 
   onInputChange(event) {
     // console.log(event.target.name)
     const inputField = event.target.name
     const inputValue = event.target.value
-    this.setState(() => ({
+    this.setState({
       [inputField]: inputValue
-    }))
+    })
   }
 
-  handleNewAccount(accountType) {
+  handleNewAccount(debitOrCreditFields) {
     this.setState({
-      [accountType]: [ ...this.state[accountType], {} ]
+      [debitOrCreditFields]: [ ...this.state[debitOrCreditFields], {} ]
     })
   }
 
@@ -117,12 +142,16 @@ class EntriesForm extends React.Component {
           value={fieldInputs.term}
         />
         <br />
-        <div style={{background: 'black', padding: '2%'}}>
-          {this.renderFields('debitFields')}
-          {this.renderFields('creditFields')}
+        <div style={{background: 'black', padding: '2%', overflow: 'hidden'}}>
+          <div style={{float: 'left', width: '45%'}}>
+            {this.renderFields('debitFields')}
+          </div>
+          <div style={{float: 'right', width: '45%'}}>
+            {this.renderFields('creditFields')}
+          </div>
           <br />
           <button
-            onClick={this.handleNewAccount}
+            // onClick={this.handleNewAccount}
             disabled={true}
           >
           Add
@@ -133,4 +162,12 @@ class EntriesForm extends React.Component {
   }
 }
 
-export default EntriesForm
+const mapStateToProps = (state) => ({
+  accounts: state.accounts
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  // startAddAccount: (account) => dispatch(startAddAccount(account))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntriesForm)

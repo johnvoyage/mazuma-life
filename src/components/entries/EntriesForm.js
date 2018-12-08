@@ -6,13 +6,64 @@ class EntriesForm extends React.Component {
     super(props)
 
     this.onInputChange = this.onInputChange.bind(this)
+    this.onEntryInputChange = this.onEntryInputChange.bind(this)
     this.handleNewEntry = this.handleNewEntry.bind(this)
+    this.handleNewAccount = this.handleNewAccount.bind(this)
+    this.renderFields = this.renderFields.bind(this)
 
     this.state = {
-      category: '',
+      debitFields: [{ account: 'Account', amount: 0 }],
+      creditFields: [{ account: 'Account', amount: 0 }],
       description: '',
       name: '',
     }
+  }
+
+  renderFields(debitOrCredit) {
+    const fieldInputs = { ...this.state }
+    const fields = fieldInputs[debitOrCredit]
+
+    return fields.map((field, idx) => {
+      return (
+        <div
+          key={idx}
+          style={{background: 'grey', padding: '2%', display: 'inline-block'}}
+        >
+          <label>Accounts</label>
+          <input
+            name='account'
+            onChange={this.onEntryInputChange}
+            type='selection'
+            placeholder='account'
+            value={field.account}
+          />
+          <label>Debit(s)</label>
+          <input
+            name='amount'
+            onChange={this.onEntryInputChange}
+            type='text'
+            placeholder='amount'
+            value={field.amount}
+          />
+          <button
+            onClick={(event) => this.handleNewAccount(debitOrCredit)}
+          >
+            +
+          </button>
+          { fields.length > 1 && (
+            <button
+            onClick={(event) => this.handleRemoveAccount(debitOrCredit, field.account)}
+            >
+            -
+            </button>
+          )}
+        </div>
+      )
+    })
+  }
+
+  onEntryInputChange(event) {
+    console.log('Here`')
   }
 
   onInputChange(event) {
@@ -24,11 +75,23 @@ class EntriesForm extends React.Component {
     }))
   }
 
+  handleNewAccount(accountType) {
+    this.setState({
+      [accountType]: [ ...this.state[accountType], {} ]
+    })
+  }
+
+  handleRemoveAccount(debitOrCredit, account) {
+    this.setState({
+      [accountType]: this.state[accountType].filter(a => a.account !== account)
+    })
+  }
+
   handleNewEntry(event) {
     const fieldInputs = { ...this.state }
     this.props.startAddEntry(fieldInputs)
     this.setState(() => ({
-      category: '',
+      // category: '',
       description: '',
       name: '',
     }))
@@ -55,40 +118,8 @@ class EntriesForm extends React.Component {
         />
         <br />
         <div style={{background: 'black', padding: '2%'}}>
-          <div style={{background: 'white', padding: '2%', display: 'inline-block'}}>
-            <label>Accounts</label>
-            <input
-              name='accounts'
-              onChange={this.onInputChange} type='text'
-              placeholder='accounts'
-              value={fieldInputs.accounts}
-            />
-            <label>Debit(s)</label>
-            <input
-              name='debits'
-              onChange={this.onInputChange} type='text'
-              placeholder='debits'
-              value={fieldInputs.debits}
-            />
-            <button name='debit-button'>Add</button>
-          </div>
-          <div style={{background: 'grey', padding: '2%', display: 'inline-block'}}>
-            <label>Accounts</label>
-            <input
-              name='accounts'
-              onChange={this.onInputChange} type='text'
-              placeholder='accounts'
-              value={fieldInputs.accounts}
-            />
-            <label>Credit(s)</label>
-            <input
-              name='credits'
-              onChange={this.onInputChange} type='text'
-              placeholder='credits'
-              value={fieldInputs.credits}
-            />
-            <button name='credit-button'>Add</button>
-          </div>
+          {this.renderFields('debitFields')}
+          {this.renderFields('creditFields')}
           <br />
           <button
             onClick={this.handleNewAccount}

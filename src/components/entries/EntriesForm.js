@@ -70,9 +70,9 @@ class EntriesForm extends React.Component {
               +
             </button>
           }
-          { fields.length > 1 && 
+          { fields.length > 1 &&
             <button
-            onClick={(event) => this.handleRemoveAccount(debitOrCreditFields, field.account)}
+              onClick={(event) => this.handleRemoveAccount(debitOrCreditFields, idx)}
             >
               -
             </button>
@@ -106,9 +106,10 @@ class EntriesForm extends React.Component {
     })
   }
 
-  handleRemoveAccount(debitOrCredit, account) {
+  handleRemoveAccount(debitOrCredit, idx) {
+    // console.log('index', idx)
     this.setState({
-      [accountType]: this.state[accountType].filter(a => a.account !== account)
+      [debitOrCredit]: this.state[debitOrCredit].filter((a, i) => i !== idx)
     })
   }
 

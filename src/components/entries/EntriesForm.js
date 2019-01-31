@@ -2,22 +2,24 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class EntriesForm extends React.Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
 
-    this.onInputChange = this.onInputChange.bind(this)
-    this.onEntryInputChange = this.onEntryInputChange.bind(this)
-    this.handleNewEntry = this.handleNewEntry.bind(this)
-    this.handleNewAccount = this.handleNewAccount.bind(this)
-    this.renderFields = this.renderFields.bind(this)
+    // this.onInputChange = this.onInputChange.bind(this)
+    // this.onEntryInputChange = this.onEntryInputChange.bind(this)
+    // this.handleNewEntry = this.handleNewEntry.bind(this)
+    // this.handleNewAccount = this.handleNewAccount.bind(this)
+    // this.renderFields = this.renderFields.bind(this)
+    // this.renderAddButton = this.renderAddButton.bind(this)
 
-    this.state = {
+    // this.
+    state = {
       debitFields: [{  }],
       creditFields: [{  }],
       description: '',
       name: '',
     }
-  }
+  // }
 
   renderFields(debitOrCreditFields) {
     const { accounts } = this.props
@@ -58,7 +60,7 @@ class EntriesForm extends React.Component {
           <label>Debit(s)</label>
           <input
             name='amount'
-            onChange={this.onEntryInputChange}
+            onChange={(event) => this.onEntryInputChange(event, debitOrCreditFields, idx)}
             type='text'
             placeholder='amount'
             value={field.amount}
@@ -82,10 +84,25 @@ class EntriesForm extends React.Component {
     })
   }
 
+  renderAddButton() {
+    // const fields = this.state[debitOrCreditFields]
+    // const isDebit = debitOrCreditFields === 'debitFields'
+
+    return (
+      <button
+        // onClick={this.handleNewAccount}
+        disabled={true}
+      >
+        Add
+      </button>
+    )
+  }
+
+
   onEntryInputChange(event, debitOrCreditFields, idx) {
-    const selectedAccount = event.target.value
+    const { name, value } = event.target
     const updatedFields = [ ...this.state[debitOrCreditFields] ]
-    updatedFields[idx].account = selectedAccount
+    updatedFields[idx][name] = value
     this.setState({
       [debitOrCreditFields]: updatedFields
     })
@@ -107,7 +124,6 @@ class EntriesForm extends React.Component {
   }
 
   handleRemoveAccount(debitOrCredit, idx) {
-    // console.log('index', idx)
     this.setState({
       [debitOrCredit]: this.state[debitOrCredit].filter((a, i) => i !== idx)
     })
@@ -151,12 +167,7 @@ class EntriesForm extends React.Component {
             {this.renderFields('creditFields')}
           </div>
           <br />
-          <button
-            // onClick={this.handleNewAccount}
-            disabled={true}
-          >
-          Add
-          </button>
+          {this.renderAddButton()}
           </div>
         </div>
     )

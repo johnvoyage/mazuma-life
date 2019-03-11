@@ -47,9 +47,11 @@ class AccountsContainer extends React.Component {
           onInputChange={this.onInputChange}
           handleNewAccount={this.handleNewAccount}
         />
-        <AccountsTable
-          // fieldInputs={this.state}
-        />
+        <div style={{padding: '5%'}}>
+          <AccountsTable
+            // fieldInputs={this.state}
+          />
+        </div>
       </div>
     )
   }

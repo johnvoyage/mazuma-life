@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 
 const TopNav = () => (
-  <div>
+  <div className='nav-bar-container'>
     <Link to='/profile'>Profile</Link>
     <Link to='/entries'>Entries</Link>
     <Link to='/accounts'>Accounts</Link>

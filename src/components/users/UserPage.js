@@ -1,15 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import { firebase } from '../../firebase/firebase'
 
-const UserPage = () => {
-  console.log(firebase.auth().email)
-
+const UserPage = (props) => {
   return (
     <div>
-      USer page
+      {`Hi ${props.displayName}!`}
+      {`User email: ${props.email}!`}
     </div>
   )
 }
 
-export default UserPage
+const mapStateToProps = (state) => ({
+  email: state.auth.email,
+  displayName: state.auth.displayName,
+})
+
+export default connect(mapStateToProps)(UserPage)

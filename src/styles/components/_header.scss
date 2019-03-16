@@ -4,6 +4,13 @@
 
 .nav-bar-container {
   background: $med-brown;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-bar-link {
+  display: flex;
+  justify-content: space-between;
 }
 
 .header__content {

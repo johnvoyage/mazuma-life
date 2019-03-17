@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 const TopNav = () => (
   <div className='nav-bar-container'>
+    <div style={{width: 10}}/>
     <div className='nav-bar-link'>
       <Link to='/profile'>Profile</Link>
     </div>
@@ -24,6 +25,7 @@ const TopNav = () => (
     <div className='nav-bar-link'>
       <Link to='/table/amortization'>Amortization Table</Link>
     </div>
+    <div style={{width: 10}}/>
   </div>
 )
 

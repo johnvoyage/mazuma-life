@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const UserPage = (props) => {
   return (
-    <div>
+    <div style={{padding: '10%'}}>
       {`Hi ${props.displayName}!`}
       {`User email: ${props.email}!`}
     </div>

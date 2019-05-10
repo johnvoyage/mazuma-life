@@ -7,7 +7,8 @@ const LoginPage = ({ startLogin }) => (
   <div className='box-layout'>
     <div className='box-layout__box'>
       <h1 className='box-layout__title'>Mazuma</h1>
-      <p>Calc and NW calc</p>
+      <p>Track your money</p>
+      <p>and know your net worth!</p>
       <button className='button' onClick={startLogin}>Login with Google</button>
     </div>
   </div>
